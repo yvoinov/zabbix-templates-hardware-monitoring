@@ -6,6 +6,8 @@ These templates were developed due to the fact that some specific monitoring tas
 
 In addition, monitoring the hardware of Windows workstations is also not well covered. For this reason, a generalized template for monitoring a typical workstation by means of WMI in combination with [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) was developed.
 
+Note: Although the templates were developed for Zabbix 7.0, they will work on earlier versions as well. Just adjust the version in the template.
+
 ## Using template HP RAID
 
 For template require to add UserParameter in agent config:
@@ -29,7 +31,5 @@ Then import template into Zabbix and apply to host(s).
 On client must be installed LibreHardwareMonitor and added to run on windows startup.
 
 Then import template into Zabbix and apply to host(s).
-
-Note: Although the templates were developed for Zabbix 7.0, they will work on earlier versions as well. Just adjust the version in the template.
 
 

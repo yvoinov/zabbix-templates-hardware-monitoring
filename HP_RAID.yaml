@@ -1,0 +1,21 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: e960332b3f6c46a1956486d4f3f99fce
+      name: 'Templates/Server hardware'
+  templates:
+    - uuid: 8cbbb773db2b49cb989405e0f89401ea
+      template: 'Template HP RAID'
+      name: 'Template HP RAID'
+      groups:
+        - name: 'Templates/Server hardware'
+      items:
+        - uuid: bd4490833a3142acac16cd3ec4035093
+          name: 'RAID Disk Status'
+          key: hp.raid.status
+          delay: 1h
+          triggers:
+            - uuid: 1e26512a485948b78a4d313dc40ed535
+              expression: 'last(/Template HP RAID/hp.raid.status)>0'
+              name: 'ALERT: RAID disk failure detected!'
+              priority: HIGH

@@ -1,0 +1,71 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 846977d1dfed4968bc5f8bdb363285bc
+      name: 'Templates/Operating systems'
+  templates:
+    - uuid: cddbedb8f99246a39c3e4f68bc14f74c
+      template: 'Windows hardware by Zabbix agent'
+      name: 'Windows hardware by Zabbix agent'
+      groups:
+        - name: 'Templates/Operating systems'
+      items:
+        - uuid: 22217e660c0a409cb7eacd9f62f534e7
+          name: 'WMI Fan 1 RPM Value'
+          key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Fan'' AND name=''Fan #1''"]'
+          history: 7d
+          trends: '0'
+          units: RPM
+          triggers:
+            - uuid: 6546a0b2a6e44e708c082685531bb6f2
+              expression: 'last(/Windows hardware by Zabbix agent/wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Fan'' AND name=''Fan #1''"])=0'
+              name: 'Fan #1 RPM'
+              priority: HIGH
+        - uuid: 1fcf056ae9fb48a6bd0780f135140d8f
+          name: 'WMI Fan 2 RPM Value'
+          key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Fan'' AND name=''Fan #2''"]'
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: RPM
+          triggers:
+            - uuid: 566ba00e00b24d6eb9c62737d1f53f56
+              expression: 'last(/Windows hardware by Zabbix agent/wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Fan'' AND name=''Fan #2''"])=0'
+              name: 'Fan #2 RPM'
+              priority: HIGH
+        - uuid: cc771ecfaaaa476bb580758a2c61c2d0
+          name: 'WMI CPU Temp Value'
+          key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Temperature'' AND name=''CPU Core #1''"]'
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: °C
+          triggers:
+            - uuid: 67e3b023dce44cfe9e971842e0a24bcb
+              expression: 'last(/Windows hardware by Zabbix agent/wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Temperature'' AND name=''CPU Core #1''"])>85'
+              name: 'CPU Temperature'
+              priority: WARNING
+        - uuid: ede1cb08f8714a80a4b2b9aa7561f769
+          name: 'WMI MB Temp Value'
+          key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Temperature'' AND name=''Temperature #1''"]'
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: °C
+          triggers:
+            - uuid: a9f154a47c554fe4a015b13cb3f4fcbc
+              expression: 'last(/Windows hardware by Zabbix agent/wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Temperature'' AND name=''Temperature #1''"])>65'
+              name: 'MB Temperature'
+              priority: WARNING
+        - uuid: 6dc05bfe12d54f1080de42132d672573
+          name: 'WMI Disk Temp Value'
+          key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Temperature'' AND parent=''/hdd/0'' AND name=''Temperature''"]'
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: °C
+          triggers:
+            - uuid: d966aac081444b08a8f7ec86e54c558a
+              expression: 'last(/Windows hardware by Zabbix agent/wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Temperature'' AND parent=''/hdd/0'' AND name=''Temperature''"])>45'
+              name: 'Disk Temperature'
+              priority: HIGH

@@ -10,19 +10,7 @@ Note: Although the templates were developed for Zabbix 7.0, they will work on ea
 
 ## Using template HP RAID
 
-For template require to add UserParameter in agent config:
-```sh
-UserParameter=hp.raid.status,sudo /usr/sbin/hpacucli ctrl slot=0 pd all show status | grep -v -e '^$' -e 'OK$' | wc -l
-```
-(for emberred controller)
-
-or
-```sh
-UserParameter=hp.raid.status,sudo /usr/sbin/hpacucli ctrl slot=1 pd all show status | grep -v -e '^$' -e 'OK$' | wc -l
-```
-(for PCIe controller)
-
-and restart agent.
+Just put HP_RAID.conf to zabbix_agent.d (zabbix_agent2.d) or add file contents to zabbix_agent.conf (for older agents) and restart agent.
 
 Then import template into Zabbix and apply to host(s).
 

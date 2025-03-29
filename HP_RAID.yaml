@@ -7,13 +7,45 @@ zabbix_export:
     - uuid: 8cbbb773db2b49cb989405e0f89401ea
       template: 'Template HP RAID'
       name: 'Template HP RAID'
+      description: 'HP SmartArray hardware monitoring template'
       groups:
         - name: 'Templates/Server hardware'
       items:
+        - uuid: 970d2285dcbd40109501d0469d0a4312
+          name: 'RAID Controller Battery Status'
+          key: hp.raid.ctrl.battery
+          delay: 5m
+          description: 'Checking the status of the array controller BBU'
+          triggers:
+            - uuid: d92e6d42c780493b801f50e2fd26eb35
+              expression: 'last(/Template HP RAID/hp.raid.ctrl.battery)<>0'
+              name: 'ALERT: RAID controller battery failure detected!'
+              priority: WARNING
+        - uuid: 7b3e3de24fd246969920dc8260e560b2
+          name: 'RAID Controller Cache Status'
+          key: hp.raid.ctrl.cache
+          delay: 5m
+          description: 'Checking the cache status of the array controller'
+          triggers:
+            - uuid: ff3b2ac3ca6d47ddb026019cad6b0b8a
+              expression: 'last(/Template HP RAID/hp.raid.ctrl.cache)<>0'
+              name: 'ALERT: RAID controller cache failure detected!'
+              priority: WARNING
+        - uuid: 851ccb5eeaa04ff9a8067910e88aa820
+          name: 'RAID Controller Status'
+          key: hp.raid.ctrl.status
+          delay: 5m
+          description: 'Checking the overall health of the array controller'
+          triggers:
+            - uuid: 23a9605a8e1849e6b3066ee17e1821d8
+              expression: 'last(/Template HP RAID/hp.raid.ctrl.status)<>0'
+              name: 'ALERT: RAID controller failure detected!'
+              priority: HIGH
         - uuid: bd4490833a3142acac16cd3ec4035093
-          name: 'RAID Disk Status'
+          name: 'RAID Disks Status'
           key: hp.raid.status
           delay: 1h
+          description: 'Checking the SMART status of array disks using the controller'
           triggers:
             - uuid: 1e26512a485948b78a4d313dc40ed535
               expression: 'last(/Template HP RAID/hp.raid.status)>0'

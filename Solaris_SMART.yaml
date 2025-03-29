@@ -1,0 +1,34 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 846977d1dfed4968bc5f8bdb363285bc
+      name: 'Templates/Operating systems'
+  templates:
+    - uuid: a4b30022c81144cbac4827079f4202e1
+      template: 'Template Solaris SMART'
+      name: 'Template Solaris SMART'
+      groups:
+        - name: 'Templates/Operating systems'
+      items:
+        - uuid: bf05eb2a43ce48c5ab7661a0cbe6cf6e
+          name: 'First system disk'
+          key: sun.disk1.smart.status
+          delay: 1h
+          description: 'First system bootable disk'
+          triggers:
+            - uuid: f1c346431c264de4bbb3ae5c0c4916f7
+              expression: 'last(/Template Solaris SMART/sun.disk1.smart.status)<>0'
+              name: 'First system disk failed'
+              priority: HIGH
+              description: 'First system bootable disk failed'
+        - uuid: 8dc74d8bf62349548e5dedf8f8499a3e
+          name: 'Second system disk'
+          key: sun.disk2.smart.status
+          delay: 1h
+          description: 'Second system bootable disk'
+          triggers:
+            - uuid: b706672a3d7144809ae9761c6e2fc10b
+              expression: 'last(/Template Solaris SMART/sun.disk2.smart.status)<>0'
+              name: 'Second system disk failed'
+              priority: HIGH
+              description: 'Second system bootable disk failed'

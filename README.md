@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/License-MIT--Clause-blue.svg)](https://github.com/yvoinov/zabbix-templates-hardware-monitoring/blob/main/LICENSE)
 ## Motivation
 
-These templates were developed due to the fact that some specific monitoring tasks, which are publicly available, are either solved unsatisfactorily or incompletely. In particular, monitoring SMART disks connected to the SmartArray controller via smartmontools extremely overloads the controller and leads to a dramatic increase in IO Wait. To zap this problem, a complete solution for general monitoring of the array disks by means of the vendor (the controller itself) was developed.
+These templates were developed due to the fact that some specific monitoring tasks, which are publicly available, are either solved unsatisfactorily or incompletely. In particular, monitoring SMART disks connected to the SmartArray controller via smartmontools extremely overloads the controller and leads to a dramatic increase in IO Wait. To zap this problem, a complete solution for general monitoring of the array disks by means of the vendor (the controller itself) was developed. The state of the controller itself and its components is also monitored.
 
 In addition, monitoring the hardware of Windows workstations is also not well covered. For this reason, a generalized template for monitoring a typical workstation by means of WMI in combination with [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) was developed.
 

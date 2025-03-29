@@ -14,6 +14,27 @@ Just put HP_RAID.conf to zabbix_agent.d (zabbix_agent2.d) or add file contents t
 
 Then import template into Zabbix and apply to host(s).
 
+### Solaris
+
+Solaris requires some special handling to work this things.
+
+Use this oneliners with user params (Make sure you are using the correct utility versions and environment, which may vary between Solaris versions; this example for Solaris 10 with OpenCSW coreutils):
+```
+UserParameter=hp.raid.ctrl.status,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 show status | /opt/csw/gnu/grep 'Controller' | /opt/csw/gnu/grep -v -e '^$' -e 'Slot' -e 'OK$' | /opt/csw/gnu/wc -l
+UserParameter=hp.raid.ctrl.cache,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 show status | /opt/csw/gnu/grep 'Cache' | /opt/csw/gnu/grep -v -e '^$' -e 'Slot' -e 'OK$' | /opt/csw/gnu/wc -l
+UserParameter=hp.raid.ctrl.battery,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 show status | /opt/csw/gnu/grep 'Battery' | /opt/csw/gnu/grep -v -e '^$' -e 'Slot' -e 'OK$' | /opt/csw/gnu/wc -l
+UserParameter=hp.raid.status,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 pd all show status | /opt/csw/gnu/grep -v -e '^$' -e 'OK$' | /opt/csw/gnu/wc -l
+```
+Then run:
+```sh
+usermod -s /bin/sh zabbix
+passwd -N zabbix
+echo "Zabbix HP CLI:::Allows running HP CLI with UID=0" >> /etc/security/prof_attr
+echo "Zabbix HP CLI:solaris:cmd:::/opt/HPQacucli/sbin/hpacucli:uid=0" >> /etc/security/exec_attr
+echo "zabbix::::type=normal;profiles=Zabbix HP CLI;roles=" >> /etc/user_attr
+```
+and restart agent.
+
 ## Using template Windows hardware by Zabbix agent
 
 On client must be installed LibreHardwareMonitor and added to run on windows startup.

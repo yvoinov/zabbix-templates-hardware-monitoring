@@ -62,7 +62,7 @@ echo "zabbix::::type=normal;profiles=Zabbix smartctl CLI;roles=" >> /etc/user_at
 ```
 and restart agent.
 
-Note: Disk names may vary depending on multipathing, disk connections on the server, etc.
+**Note:** Disk names may vary depending on multipathing, disk connections on the server, etc.
 
 ## Using template Windows hardware by Zabbix agent
 

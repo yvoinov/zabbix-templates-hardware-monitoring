@@ -70,4 +70,4 @@ On client must be installed LibreHardwareMonitor and added to run on windows sta
 
 Then import template into Zabbix and apply to host(s).
 
-**Note:** It is recommended to modify the autorun task in the Task Scheduler so that the monitor is launched not at the login of any user, but at the startup of the system; was a hidden Windows task. Also modify the options of the monitor itself to start minimized.
+**Note:** It is recommended to modify the autorun task in the Task Scheduler so that the monitor is launched not at the login of any user, but at the startup of the system; in addition, it is recommended to make it a hidden Windows task and run with the highest rights. Also modify the options of the monitor itself to start minimized.

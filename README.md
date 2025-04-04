@@ -69,3 +69,5 @@ and restart agent.
 On client must be installed LibreHardwareMonitor and added to run on windows startup.
 
 Then import template into Zabbix and apply to host(s).
+
+**Note:** It is recommended to modify the autorun task in the Task Scheduler so that the monitor is launched not at the login of any user, but at the startup of the system; was a hidden Windows task. Also modify the options of the monitor itself to start minimized.

@@ -64,6 +64,12 @@ and restart agent.
 
 **Note:** Disk names may vary depending on multipathing, disk connections on the server, etc.
 
+**Note:** When used together with other monitoring systems, it is possible to overlap the execution of the hpacucli utility, which leads to false positives of the hp.raid.status key. In this case, a wrapper script is used for the call:
+```sh
+UserParameter=hp.raid.status,/usr/local/bin/zabbix_safe_hpacucli.sh
+```
+Place  it  in  /usr/local/bin and grant execution rights. The script is dual-platform. Set the ctrl_slot variable in the script to the correct value corresponding to your controller.
+
 ## Using template Windows hardware by Zabbix agent
 
 On client must be installed LibreHardwareMonitor and added to run on windows startup.

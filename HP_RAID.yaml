@@ -44,8 +44,9 @@ zabbix_export:
         - uuid: bd4490833a3142acac16cd3ec4035093
           name: 'RAID Disks Status'
           key: hp.raid.status
-          delay: 1h
+          delay: 5m
           description: 'Checking the SMART status of array disks using the controller'
+          timeout: 30s
           triggers:
             - uuid: 1e26512a485948b78a4d313dc40ed535
               expression: 'last(/Template HP RAID/hp.raid.status)>0'

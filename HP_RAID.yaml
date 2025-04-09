@@ -16,6 +16,7 @@ zabbix_export:
           key: hp.raid.ctrl.battery
           delay: 5m
           description: 'Checking the status of the array controller BBU'
+          timeout: 30s
           triggers:
             - uuid: d92e6d42c780493b801f50e2fd26eb35
               expression: 'last(/Template HP RAID/hp.raid.ctrl.battery)<>0'
@@ -26,6 +27,7 @@ zabbix_export:
           key: hp.raid.ctrl.cache
           delay: 5m
           description: 'Checking the cache status of the array controller'
+          timeout: 30s
           triggers:
             - uuid: ff3b2ac3ca6d47ddb026019cad6b0b8a
               expression: 'last(/Template HP RAID/hp.raid.ctrl.cache)<>0'
@@ -36,6 +38,7 @@ zabbix_export:
           key: hp.raid.ctrl.status
           delay: 5m
           description: 'Checking the overall health of the array controller'
+          timeout: 30s
           triggers:
             - uuid: 23a9605a8e1849e6b3066ee17e1821d8
               expression: 'last(/Template HP RAID/hp.raid.ctrl.status)<>0'

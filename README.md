@@ -37,11 +37,19 @@ echo "zabbix::::type=normal;profiles=Zabbix HP CLI;roles=" >> /etc/user_attr
 ```
 and restart agent.
 
-**Note:** When used together with other monitoring systems, it is possible to overlap the execution of the hpacucli utility, which leads to false positives of the hp.raid.status key. In this case, a wrapper script is used for the call:
+**Note:** When used together with other monitoring systems, it is possible to overlap the execution of the hpacucli utility, which leads to false positives of the hp.raid.status key and/or timeout errors with other keys. In this case, a wrapper script is used for the call:
 ```sh
-UserParameter=hp.raid.status,/usr/local/bin/zabbix_safe_hpacucli.sh
+UserParameter=hp.raid.status,/usr/local/bin/zabbix_safe_hpacucli.sh raid
 ```
 Place  it  in  /usr/local/bin and grant execution rights. The script is dual-platform. Set the ctrl_slot variable in the script to the correct value corresponding to your controller.
+
+The same can be done with the rest of the keys:
+```sh
+UserParameter=hp.raid.ctrl.status,/usr/local/bin/zabbix_safe_hpacucli.sh ctrl
+UserParameter=hp.raid.ctrl.cache,/usr/local/bin/zabbix_safe_hpacucli.sh cache
+UserParameter=hp.raid.ctrl.battery,/usr/local/bin/zabbix_safe_hpacucli.sh battery
+```
+Please note that the script only supports these command line arguments.
 
 ## Using template Solaris SMART
 

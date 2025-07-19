@@ -8,7 +8,7 @@ Also, a SMART monitoring template for dual system boot disks (usually mirrored, 
 
 In addition, monitoring the hardware of Windows workstations is also not well covered. For this reason, a generalized template for monitoring a typical workstation by means of WMI in combination with [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) was developed.
 
-Note: Although the templates were developed for Zabbix 7.0, they will work on earlier versions as well. Just adjust the version in the template.
+**Note:** Although the templates were developed for Zabbix 7.0, they will work on earlier versions as well. Just adjust the version in the template.
 
 ## Using template HP RAID
 

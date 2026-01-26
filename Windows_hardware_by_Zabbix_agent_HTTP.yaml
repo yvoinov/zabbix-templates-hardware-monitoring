@@ -11,7 +11,7 @@ zabbix_export:
         - name: 'Templates/Operating systems'
       items:
         - uuid: cc771ecfaaaa476bb580758a2c61c2d1
-          name: 'CPU Core #1 Temperature'
+          name: 'CPU Temp Value'
           type: DEPENDENT
           key: lhm.cpu.core1.temp
           delay: '0'
@@ -39,7 +39,7 @@ zabbix_export:
               name: 'CPU Temperature'
               priority: WARNING
         - uuid: 6dc05bfe12d54f1080de42132d672573
-          name: 'Disk Temperature'
+          name: 'Disk Temp Value'
           type: DEPENDENT
           key: lhm.disk.temp
           delay: '0'
@@ -67,7 +67,7 @@ zabbix_export:
               name: 'Disk Temperature'
               priority: HIGH
         - uuid: 22217e660c0a409cb7eacd9f62f534e7
-          name: 'Fan #1 RPM'
+          name: 'Fan #1 RPM Value'
           type: DEPENDENT
           key: lhm.fan1.rpm
           delay: '0'
@@ -91,7 +91,7 @@ zabbix_export:
               name: 'Fan #1 RPM'
               priority: HIGH
         - uuid: 1fcf056ae9fb48a6bd0780f135140d8f
-          name: 'Fan #2 RPM'
+          name: 'Fan #2 RPM Value'
           type: DEPENDENT
           key: lhm.fan2.rpm
           delay: '0'

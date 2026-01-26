@@ -80,8 +80,10 @@ and restart agent.
 
 ## Using template Windows hardware by Zabbix agent
 
-On client must be installed LibreHardwareMonitor and added to run on windows startup.
+On client must be installed LibreHardwareMonitor/OpenHardwareMonitor and added to run on windows startup.
 
 Then import template into Zabbix and apply to host(s).
 
 **Note:** It is recommended to modify the autorun task in the Task Scheduler so that the monitor is launched not at the login of any user, but at the startup of the system; in addition, it is recommended to make it a hidden Windows task and run with the highest rights. Also modify the options of the monitor itself to start minimized.
+
+Since WMI technology has been deprecated, LibreHardwareMonitor/OpenHardwareMonitor contain a web server that returns data in JSON. For this reason, an updated Windows hardware template by Zabbix agent HTTP has been developed. To use it, you must enable the web listener in the application settings before launching it in the task scheduler.

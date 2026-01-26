@@ -6,7 +6,7 @@ These templates were developed due to the fact that some specific monitoring tas
 
 Also, a SMART monitoring template for dual system boot disks (usually mirrored, especially with ZFS) has been added.
 
-In addition, monitoring the hardware of Windows workstations is also not well covered. For this reason, a generalized template for monitoring a typical workstation by means of WMI in combination with [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) was developed.
+In addition, monitoring the hardware of Windows workstations is also not well covered. For this reason, a generalized templates for monitoring a typical workstation by means of WMI/JSON in combination with [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)/[OpenHardwareMonitor](https://openhardwaremonitor.org/) was developed.
 
 **Note:** Although the templates were developed for Zabbix 7.0, they will work on earlier versions as well. Just adjust the version in the template.
 
@@ -86,4 +86,4 @@ Then import template into Zabbix and apply to host(s).
 
 **Note:** It is recommended to modify the autorun task in the Task Scheduler so that the monitor is launched not at the login of any user, but at the startup of the system; in addition, it is recommended to make it a hidden Windows task and run with the highest rights. Also modify the options of the monitor itself to start minimized.
 
-Since WMI technology has been deprecated, LibreHardwareMonitor/OpenHardwareMonitor contain a web server that returns data in JSON. For this reason, an updated **Windows hardware template by Zabbix agent HTTP** has been developed. To use it, you must enable the web listener in the application settings before launching it in the task scheduler.
+Since WMI technology has been deprecated, LibreHardwareMonitor/OpenHardwareMonitor contain a web server that returns data in JSON. For this reason, an updated **Windows hardware template by Zabbix agent HTTP** has been written. To use it, you must enable the web listener in the application settings before launching it in the task scheduler.

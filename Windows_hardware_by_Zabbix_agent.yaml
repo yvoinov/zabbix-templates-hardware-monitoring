@@ -11,7 +11,7 @@ zabbix_export:
         - name: 'Templates/Operating systems'
       items:
         - uuid: 22217e660c0a409cb7eacd9f62f534e7
-          name: 'Fan 1 RPM Value'
+          name: 'Fan #1 RPM Value'
           key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Fan'' AND name=''Fan #1''"]'
           history: 7d
           trends: '0'
@@ -22,7 +22,7 @@ zabbix_export:
               name: 'Fan #1 RPM'
               priority: HIGH
         - uuid: 1fcf056ae9fb48a6bd0780f135140d8f
-          name: 'Fan 2 RPM Value'
+          name: 'Fan #2 RPM Value'
           key: 'wmi.get[Root\LibreHardwareMonitor,"SELECT value FROM Sensor WHERE SensorType =''Fan'' AND name=''Fan #2''"]'
           history: 7d
           value_type: FLOAT

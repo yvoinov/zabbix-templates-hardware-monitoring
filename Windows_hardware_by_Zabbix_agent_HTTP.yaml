@@ -50,7 +50,7 @@ zabbix_export:
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$..Children[?(@.Text=="Temperature" && @.SensorId=="/hdd/0/temperature/0")].Value'
+                - '$..Children[?(@.Type=="Temperature" && @.SensorId=="/hdd/0/temperature/0")].Value'
             - type: REGEX
               parameters:
                 - '([0-9]+,[0-9]+).*'
@@ -135,7 +135,7 @@ zabbix_export:
           preprocessing:
             - type: JSONPATH
               parameters:
-                - '$..Children[?(@.Text=="Temperature #1")].Value'
+                - '$..Children[?(@.Type=="Temperature" && @.Text=="Temperature #1")].Value'
             - type: REGEX
               parameters:
                 - '([0-9]+,[0-9]+).*'

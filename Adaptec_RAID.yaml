@@ -1,0 +1,43 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: e960332b3f6c46a1956486d4f3f99fce
+      name: 'Templates/Server hardware'
+  templates:
+    - uuid: 62b60c84c95f4cfb982fb38854c8f744
+      template: 'Adaptec RAID'
+      name: 'Adaptec RAID'
+      description: 'Simple Adaptec RAID template for basic monitoring'
+      groups:
+        - name: 'Templates/Server hardware'
+      items:
+        - uuid: 29d4a4ff3ced4108b495424441931336
+          name: 'Adaptec controller status'
+          key: adaptec.ctrl.status
+          delay: 1h
+          description: 'Controller status. 0 for optimal, any other failed'
+          triggers:
+            - uuid: 9db51418e5c94769b978f91f9d3137eb
+              expression: 'last(/Adaptec RAID/adaptec.ctrl.status)=1'
+              name: 'Adaptec controller failed'
+              priority: HIGH
+        - uuid: 9d5e6892f01a4a01bbed9cccda2bccca
+          name: 'Adaptec logical devices degraded'
+          key: adaptec.ld.degraded
+          delay: 1h
+          description: 'Adaptec logical devices status. 0 - optimal, any other - degraded'
+          triggers:
+            - uuid: 4c72ffd7bbaa430b8240b4a35df8906a
+              expression: 'last(/Adaptec RAID/adaptec.ld.degraded)<>0'
+              name: 'Adaptec logical device(s) degraded'
+              priority: AVERAGE
+        - uuid: 248535ea879d453ea529b5ab4e498660
+          name: 'Adaptec logical devices failed'
+          key: adaptec.ld.failed
+          delay: 1h
+          description: 'Adaptec logical devices status. 0 - optimal, any other - failed'
+          triggers:
+            - uuid: cd806f993b1e48c0be1759d3ec827443
+              expression: 'last(/Adaptec RAID/adaptec.ld.failed)<>0'
+              name: 'Adaptec logical device(s) failed'
+              priority: HIGH

@@ -14,7 +14,7 @@ In addition, monitoring the hardware of Windows workstations is also not well co
 
 First download and install arcconf. For example, from [here](https://hwraid.le-vert.net/debian/pool-buster/arcconf-1.07)
 
-Add /usr/sbin/arcconf to sudoers. For example, /etc/sudoers.d/zabbix file should comtains:
+Add `/usr/sbin/arcconf` to sudoers. For example, /etc/sudoers.d/zabbix file should comtains:
 ```sh
 zabbix ALL=(ALL) NOPASSWD:/usr/sbin/arcconf
 ```

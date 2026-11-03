@@ -10,6 +10,24 @@ In addition, monitoring the hardware of Windows workstations is also not well co
 
 **Note:** Although the templates were developed for Zabbix 7.0, they will work on earlier versions as well. Just adjust the version in the template.
 
+## Using template Adaptec RAID
+
+First download and install arcconf. For example, from [here](https://hwraid.le-vert.net/debian/pool-buster/arcconf-1.07)
+
+Add /usr/sbin/arcconf to sudoers. For example, /etc/sudoers.d/zabbix file should comtains:
+```sh
+zabbix ALL=(ALL) NOPASSWD:/usr/sbin/arcconf
+```
+For template require to add UserParameter in agent config:
+```sh
+UserParameter=adaptec.ld.failed,sudo /usr/sbin/arcconf GETCONFIG 1 | grep "Logical devices" | awk -F "/" '{print $4}'
+UserParameter=adaptec.ld.degraded,sudo /usr/sbin/arcconf GETCONFIG 1 | grep "Logical devices" | awk -F "/" '{print $5}'
+UserParameter=adaptec.ctrl.status,sudo /usr/sbin/arcconf GETCONFIG 1 | grep "Controller Status" | grep -vc Optimal
+```
+Or put Adaptec_RAID.conf to zabbix_agent.d (zabbix_agent2.d) or add file contents to zabbix_agent.conf (for older agents) and restart agent.
+
+Then import template into Zabbix and apply to host(s).
+
 ## Using template HP RAID
 
 Just put HP_RAID.conf to zabbix_agent.d (zabbix_agent2.d) or add file contents to zabbix_agent.conf (for older agents) and restart agent.
@@ -21,7 +39,7 @@ Then import template into Zabbix and apply to host(s).
 Solaris requires some special handling to work this things.
 
 Use this oneliners with user params (Make sure you are using the correct utility versions and environment, which may vary between Solaris versions; this example for Solaris 10 with OpenCSW coreutils):
-```
+```sh
 UserParameter=hp.raid.ctrl.status,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 show status | /opt/csw/gnu/grep 'Controller' | /opt/csw/gnu/grep -v -e '^$' -e 'Slot' -e 'OK$' | /opt/csw/gnu/wc -l
 UserParameter=hp.raid.ctrl.cache,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 show status | /opt/csw/gnu/grep 'Cache' | /opt/csw/gnu/grep -v -e '^$' -e 'Slot' -e 'OK$' | /opt/csw/gnu/wc -l
 UserParameter=hp.raid.ctrl.battery,pfexec /opt/HPQacucli/sbin/hpacucli ctrl slot=0 show status | /opt/csw/gnu/grep 'Battery' | /opt/csw/gnu/grep -v -e '^$' -e 'Slot' -e 'OK$' | /opt/csw/gnu/wc -l
@@ -54,7 +72,7 @@ Please note that the script only supports these command line arguments.
 ## Using template Solaris SMART
 
 Use this oneliners with user params (Make sure you are using the correct utility versions and environment, which may vary between Solaris versions; this example for Solaris 10 with OpenCSW coreutils) or put Solaris_SMART.conf to zabbix_agent.d (zabbix_agent2.d):
-```
+```sh
 # Get S.M.A.R.T status from system disks
 # Modify disks according to your system and configuration (see smartctl --scan).
 #
